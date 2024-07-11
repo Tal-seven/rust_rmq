@@ -1,0 +1,26 @@
+/**
+ * Scan message compatible with sensor_msgs/LaserScan Ros v1
+ */
+
+syntax = "proto3";
+// import "header.proto";
+
+package rust_rmq.sensors;
+
+import "google/protobuf/empty.proto";
+
+message Scan {
+  // Header header = 1;
+  float angle_min = 2;
+  float angle_max = 3;
+  float angle_increment = 4;
+  float scan_time = 5;
+  float range_min = 6;
+  float range_max = 7;
+  repeated float ranges = 8;
+  repeated float intensties = 9;
+}
+
+service ScanService {
+  rpc getScanStream(google.protobuf.Empty) returns (stream Scan) {}
+}

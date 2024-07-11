@@ -1,0 +1,18 @@
+[package]
+name = "rust_rmq"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+amqprs = { version = "1.6.2", features = ["tokio-rustls"] }
+tokio = { version = "1.38.0", features = ["full"] }
+bytes = "1.6.0"
+futures = "0.3.30"
+hdrhistogram = "7.5.4"
+prost = { version = "0.12.6", features = ["no-recursion-limit", "prost-derive"] }
+rdkafka = "0.36.2"
+
+
+
+[build-dependencies]
+prost-build = { version = "0.12.6" }
