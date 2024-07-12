@@ -47,7 +47,7 @@ async fn connect_rabbit_mq(connection_details: &RabbitConnect) -> Connection {
             &connection_details.username,
             &connection_details.password,
         )
-        .virtual_host("customers"),
+        .virtual_host("robots"),
     )
     .await;
 
@@ -61,7 +61,7 @@ async fn connect_rabbit_mq(connection_details: &RabbitConnect) -> Connection {
                 &connection_details.username,
                 &connection_details.password,
             )
-            .virtual_host("customers"),
+            .virtual_host("robots"),
         )
         .await;
     }
@@ -85,7 +85,7 @@ async fn get_scan(connection_details: RabbitConnect) {
     loop {
         let mut connection = connect_rabbit_mq(&connection_details).await;
         let mut channel = channel_rabbitmq(&connection).await;
-        let args = BasicConsumeArguments::new("customers_created", "");
+        let args = BasicConsumeArguments::new("lidarscan", "");
         let (ctag, mut messages_rx) = channel.basic_consume_rx(args.clone()).await.unwrap();
 
         while let Some(msg) = messages_rx.recv().await {
